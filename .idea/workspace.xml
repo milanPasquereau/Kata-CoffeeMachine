@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FIX] Corrections diverses, suppressions de code inutile">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/moneyChecking/MoneyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/money/MoneyChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/moneyChecking/MoneyCheckerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/money/MoneyCheckerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/report/DailyReportBuilderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/report/DailyReportBuilderImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/services/MoneyCheckerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/MoneyCheckerImplTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FIX] Corrections de naming de variables" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -203,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670937579557</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="[FIX] Corrections de naming de variables">
+      <created>1670938849570</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670938849570</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,6 +224,7 @@
     <MESSAGE value="[FEAT-IT3] Quatrième iteration, ajout d'un service permettant d'obtenir un report des ventes" />
     <MESSAGE value="[FEAT-IT5] Cinquième iteration, ajout de deux services en cas de pénurie d'eau ou de lait et envoi de message si c'est le cas" />
     <MESSAGE value="[FIX] Corrections diverses, suppressions de code inutile" />
-    <option name="LAST_COMMIT_MESSAGE" value="[FIX] Corrections diverses, suppressions de code inutile" />
+    <MESSAGE value="[FIX] Corrections de naming de variables" />
+    <option name="LAST_COMMIT_MESSAGE" value="[FIX] Corrections de naming de variables" />
   </component>
 </project>

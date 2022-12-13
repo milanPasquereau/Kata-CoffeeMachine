@@ -52,6 +52,8 @@ class CommandServiceImplTest {
 
         verify(drinkMaker).makeDrink(expectedOrder);
         verifyNoMoreInteractions(drinkMaker);
+        verify(orderRepository).save(order);
+        verifyNoMoreInteractions(orderRepository);
     }
 
     @Test
@@ -64,6 +66,8 @@ class CommandServiceImplTest {
 
         verify(drinkMaker).makeDrink(expectedOrder);
         verifyNoMoreInteractions(drinkMaker);
+        verify(orderRepository).save(order);
+        verifyNoMoreInteractions(orderRepository);
     }
 
     @Test
@@ -76,6 +80,8 @@ class CommandServiceImplTest {
 
         verify(drinkMaker).makeDrink(expectedOrder);
         verifyNoMoreInteractions(drinkMaker);
+        verify(orderRepository).save(order);
+        verifyNoMoreInteractions(orderRepository);
     }
 
     @Test
@@ -87,6 +93,7 @@ class CommandServiceImplTest {
 
         verify(drinkMaker).sendMessage("M:Monney is missing: 0.5 €");
         verifyNoMoreInteractions(drinkMaker);
+        verifyNoInteractions(orderRepository);
     }
 
     @Test
@@ -94,11 +101,13 @@ class CommandServiceImplTest {
     void shouldTranslateTeaOrderWithoutSugarToString() {
         when(moneyChecker.isAffordable(OrderType.TEA)).thenReturn(0.0);
         final Order order = new Order(OrderType.TEA, 0, false);
-        commandService.sendOrderToDrinkMaker(order);
         final String expectedOrder = "T::";
+        commandService.sendOrderToDrinkMaker(order);
 
         verify(drinkMaker).makeDrink(expectedOrder);
         verifyNoMoreInteractions(drinkMaker);
+        verify(orderRepository).save(order);
+        verifyNoMoreInteractions(orderRepository);
     }
 
     @Test
@@ -143,5 +152,6 @@ class CommandServiceImplTest {
 
         verify(emailNotifier).notifyMissingDrink("C::");
         verifyNoMoreInteractions(emailNotifier);
+        verifyNoInteractions(orderRepository);
     }
 }
