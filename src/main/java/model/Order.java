@@ -4,8 +4,7 @@ public class Order {
     private final OrderType orderType;
     private final int sugars;
     private final boolean withAStick;
-
-    private boolean extraHot;
+    private final boolean extraHot;
 
     public Order(OrderType orderType, int sugars, boolean extraHot) {
         this.orderType = orderType;
@@ -28,9 +27,5 @@ public class Order {
 
     public boolean isExtraHot() {
         return extraHot;
-    }
-
-    public void setExtraHot(boolean extraHot) {
-        this.extraHot = extraHot;
     }
 }

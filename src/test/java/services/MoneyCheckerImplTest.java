@@ -1,6 +1,5 @@
 package services;
 
-import model.Order;
 import model.OrderType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine">
+    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FEAT-IT3] Troisième iteration, ajout du type de boisson jus d'orange et option de boisson extra chaude">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/OrderType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/OrderType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/CommandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CommandService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/MoneyCheckerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MoneyCheckerImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/services/MoneyCheckerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/MoneyCheckerImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +75,7 @@
       <module name="Kata-CoffeeMachine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="services.*" />
+          <option name="PATTERN" value="services.report.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -90,7 +90,7 @@
       <module name="Kata-CoffeeMachine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="services.*" />
+          <option name="PATTERN" value="services.report.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -102,17 +102,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommandServiceImplTest.shouldTranslateTeaOrderWithoutSugarToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DailyReportBuilderImplTest.shouldPrintDailyReport" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Kata-CoffeeMachine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="services.*" />
+          <option name="PATTERN" value="services.report.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="services" />
-      <option name="MAIN_CLASS_NAME" value="services.CommandServiceImplTest" />
-      <option name="METHOD_NAME" value="shouldTranslateTeaOrderWithoutSugarToString" />
+      <option name="MAIN_CLASS_NAME" value="services.DailyReportBuilderImplTest" />
+      <option name="METHOD_NAME" value="shouldPrintDailyReport" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -122,7 +122,7 @@
       <module name="Kata-CoffeeMachine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="services.*" />
+          <option name="PATTERN" value="services.report.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -136,10 +136,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in Kata-CoffeeMachine" />
+        <item itemvalue="JUnit.DailyReportBuilderImplTest.shouldPrintDailyReport" />
         <item itemvalue="JUnit.MoneyCheckerImplTest" />
         <item itemvalue="JUnit.CommandServiceImplTest" />
         <item itemvalue="JUnit.CommandServiceImplTest.shouldTranslateCoffeeOrderWithSugarToString" />
-        <item itemvalue="JUnit.CommandServiceImplTest.shouldTranslateTeaOrderWithoutSugarToString" />
       </list>
     </recent_temporary>
   </component>
@@ -173,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670924831106</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[FEAT-IT3] Troisième iteration, ajout du type de boisson jus d'orange et option de boisson extra chaude">
+      <created>1670925823074</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670925823074</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -191,19 +198,20 @@
     <MESSAGE value="[INIT] Initialisation du projet" />
     <MESSAGE value="[FEAT-IT1] Premiere iteration, implementation de la logique de construction d'ordres" />
     <MESSAGE value="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine" />
-    <option name="LAST_COMMIT_MESSAGE" value="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine" />
+    <MESSAGE value="[FEAT-IT3] Troisième iteration, ajout du type de boisson jus d'orange et option de boisson extra chaude" />
+    <option name="LAST_COMMIT_MESSAGE" value="[FEAT-IT3] Troisième iteration, ajout du type de boisson jus d'orange et option de boisson extra chaude" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java</url>
-          <line>18</line>
+          <line>25</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java</url>
-          <line>21</line>
+          <line>28</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>

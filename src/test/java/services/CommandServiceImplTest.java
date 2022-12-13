@@ -7,10 +7,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import repositories.OrderRepository;
+import services.report.DailyReportBuilder;
 
 import static org.mockito.Mockito.*;
 
@@ -23,12 +24,18 @@ class CommandServiceImplTest {
     @Mock
     private MoneyChecker moneyChecker;
 
+    @Mock
+    private DailyReportBuilder dailyReportBuilder;
+
+    @Mock
+    private OrderRepository orderRepository;
+
     @InjectMocks
     private CommandServiceImpl commandService;
 
     @BeforeEach
     void init() {
-        commandService = new CommandServiceImpl(drinkMaker, moneyChecker);
+        commandService = new CommandServiceImpl(drinkMaker, moneyChecker, dailyReportBuilder, orderRepository);
     }
 
     @Test
@@ -108,5 +115,16 @@ class CommandServiceImplTest {
 
         verify(moneyChecker).insertMoney(5.5);
         verifyNoMoreInteractions(moneyChecker);
+    }
+
+    @Test
+    @DisplayName("should print daily report")
+    void shouldPrintDailyReport() {
+        commandService.printDailyReport();
+
+        verify(dailyReportBuilder).printReport(any());
+        verifyNoMoreInteractions(dailyReportBuilder);
+        verify(orderRepository).getAllOrders();
+        verifyNoMoreInteractions(orderRepository);
     }
 }

@@ -2,6 +2,8 @@ package services;
 
 import model.Message;
 import model.Order;
+import repositories.OrderRepository;
+import services.report.DailyReportBuilder;
 
 public class CommandServiceImpl implements CommandService {
 
@@ -9,9 +11,15 @@ public class CommandServiceImpl implements CommandService {
 
     private final MoneyChecker moneyChecker;
 
-    public CommandServiceImpl(DrinkMaker drinkMaker, MoneyChecker moneyChecker) {
+    private final DailyReportBuilder dailyReportBuilder;
+
+    private final OrderRepository orderRepository;
+
+    public CommandServiceImpl(DrinkMaker drinkMaker, MoneyChecker moneyChecker, DailyReportBuilder dailyReportBuilder, OrderRepository orderRepository) {
         this.drinkMaker = drinkMaker;
         this.moneyChecker = moneyChecker;
+        this.dailyReportBuilder = dailyReportBuilder;
+        this.orderRepository = orderRepository;
     }
 
     @Override
@@ -20,6 +28,7 @@ public class CommandServiceImpl implements CommandService {
         if(amountInMachine >= 0) {
             String translatedOrder = buildStringFromOrder(order);
             drinkMaker.makeDrink(translatedOrder);
+            orderRepository.save(order);
         } else {
             sendMessageToDringMaker(new Message("Monney is missing: "+Math.abs(amountInMachine)+" €"));
         }
@@ -36,7 +45,12 @@ public class CommandServiceImpl implements CommandService {
         this.moneyChecker.insertMoney(amount);
     }
 
-    private static String buildStringFromOrder(Order order) {
+    @Override
+    public void printDailyReport() {
+        dailyReportBuilder.printReport(orderRepository.getAllOrders());
+    }
+
+    private String buildStringFromOrder(Order order) {
         String orderType = switch (order.getOrderType()) {
             case TEA -> "T";
             case CHOCOLATE -> "H";
@@ -51,7 +65,7 @@ public class CommandServiceImpl implements CommandService {
                 + (order.isWithAStick() ? 0 : "");
     }
 
-    private static String buildStringFromMessage(Message message) {
+    private String buildStringFromMessage(Message message) {
         return "M"+":"+message.content();
     }
 }
