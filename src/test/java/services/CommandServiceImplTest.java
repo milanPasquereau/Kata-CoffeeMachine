@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import repositories.OrderRepository;
 import services.drinkMaker.DrinkMaker;
-import services.moneyChecking.MoneyChecker;
+import services.money.MoneyChecker;
 import services.report.DailyReportBuilder;
 import services.shortage.BeverageQuantityChecker;
 import services.shortage.EmailNotifier;
@@ -68,7 +68,7 @@ class CommandServiceImplTest {
 
     @Test
     @DisplayName("should translate a orange juice order with sufficient money")
-    void shouldOrderOrangeJuiceWithSugar() {
+    void shouldOrderOrangeJuice() {
         final Order order = new Order(OrderType.ORANGE_JUICE, 0, false);
         when(moneyChecker.isAffordable(OrderType.ORANGE_JUICE)).thenReturn(1.0);
         commandService.sendOrderToDrinkMaker(order);

@@ -4,7 +4,7 @@ import model.Message;
 import model.Order;
 import repositories.OrderRepository;
 import services.drinkMaker.DrinkMaker;
-import services.moneyChecking.MoneyChecker;
+import services.money.MoneyChecker;
 import services.report.DailyReportBuilder;
 import services.shortage.BeverageQuantityChecker;
 import services.shortage.EmailNotifier;

@@ -1,8 +1,6 @@
-package services.moneyChecking;
+package services.money;
 
 import model.OrderType;
-import services.moneyChecking.MoneyChecker;
-
 public class MoneyCheckerImpl implements MoneyChecker {
 
     private double currentAmount;

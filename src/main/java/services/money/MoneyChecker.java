@@ -1,4 +1,4 @@
-package services.moneyChecking;
+package services.money;
 
 import model.OrderType;
 

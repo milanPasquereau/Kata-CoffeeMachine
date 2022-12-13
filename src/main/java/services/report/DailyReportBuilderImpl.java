@@ -16,43 +16,42 @@ public class DailyReportBuilderImpl implements DailyReportBuilder {
     @Override
     public void printReport(List<Order> orders) {
         double totalAmount = 0;
-        int nbSelledCoffees = 0;
-        int nbSelledChocolates = 0;
-        int nbSelledTeas = 0;
-        int nbSelledOrangeJuices = 0;
+        int nbSoldCoffees = 0;
+        int nbSoldChocolates = 0;
+        int nbSoldTeas = 0;
+        int nbSoldOrangeJuices = 0;
         for(Order order : orders) {
             switch (order.getOrderType()) {
                 case COFFEE -> {
                     totalAmount += PRICE_COFFEE;
-                    nbSelledCoffees++;
+                    nbSoldCoffees++;
                 }
                 case TEA -> {
                     totalAmount += PRICE_TEA;
-                    nbSelledTeas++;
+                    nbSoldTeas++;
                 }
                 case CHOCOLATE -> {
                     totalAmount += PRICE_CHOCOLATE;
-                    nbSelledChocolates++;
+                    nbSoldChocolates++;
                 }
                 case ORANGE_JUICE -> {
                     totalAmount += PRICE_ORANGE_JUICE;
-                    nbSelledOrangeJuices++;
+                    nbSoldOrangeJuices++;
                 }
             }
         }
-        System.out.print(buildReportFromData(totalAmount, nbSelledCoffees, nbSelledChocolates, nbSelledTeas, nbSelledOrangeJuices));
+        System.out.print(buildReportFromData(totalAmount, nbSoldCoffees, nbSoldChocolates, nbSoldTeas, nbSoldOrangeJuices));
     }
 
-    private String buildReportFromData(double totalAmount, int nbSelledCoffees,
-                                       int nbSelledChocolates, int nbSelledTeas,
-                                       int nbSelledOrangeJuices) {
-        BigDecimal bd = BigDecimal.valueOf(totalAmount);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
+    private String buildReportFromData(double totalAmount, int nbSoldCoffees,
+                                       int nbSoldChocolates, int nbSoldTeas,
+                                       int nbSoldOrangeJuices) {
+        BigDecimal bd = BigDecimal.valueOf(totalAmount).setScale(2, RoundingMode.HALF_UP);
         return "Sales made:"
-                + "\nCoffees: " + nbSelledCoffees
-                + "\nChocolates: " + nbSelledChocolates
-                + "\nTeas: " + nbSelledTeas
-                + "\nOrange juices: " + nbSelledOrangeJuices
+                + "\nCoffees: " + nbSoldCoffees
+                + "\nChocolates: " + nbSoldChocolates
+                + "\nTeas: " + nbSoldTeas
+                + "\nOrange juices: " + nbSoldOrangeJuices
                 + "\nTotal amount of sales: " + bd.doubleValue() + " €";
     }
 }
