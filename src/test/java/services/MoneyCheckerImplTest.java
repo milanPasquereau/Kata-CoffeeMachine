@@ -19,7 +19,7 @@ class MoneyCheckerImplTest {
     @Test
     @DisplayName("should return negative amount of money when there is no money")
     void shouldReturnNegativeAmountOfMoneyWithNoMoney() {
-        double amountMissing = moneyChecker.isAffordable(OrderType.COFFEE);
+        final double amountMissing = moneyChecker.isAffordable(OrderType.COFFEE);
         assertEquals(-0.6, amountMissing);
     }
 
@@ -27,7 +27,7 @@ class MoneyCheckerImplTest {
     @DisplayName("should return positive amount of money when there is sufficient money")
     void shouldReturnPositiveAmountOfMoneyWithSufficientMoney() {
         moneyChecker.insertMoney(5.0);
-        double amount = moneyChecker.isAffordable(OrderType.COFFEE);
+        final double amount = moneyChecker.isAffordable(OrderType.COFFEE);
         assertEquals(4.4, amount);
     }
 }

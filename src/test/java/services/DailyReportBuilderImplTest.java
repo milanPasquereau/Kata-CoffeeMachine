@@ -16,8 +16,6 @@ import java.io.PrintStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class DailyReportBuilderImplTest {
@@ -42,18 +40,19 @@ class DailyReportBuilderImplTest {
     @Test
     @DisplayName("should print daily report")
     void shouldPrintDailyReport() {
-        List<Order> orders = List.of(
+        final List<Order> orders = List.of(
                 new Order(OrderType.COFFEE, 2, false),
                 new Order(OrderType.CHOCOLATE, 0, true),
                 new Order(OrderType.ORANGE_JUICE, 0, false),
                 new Order(OrderType.COFFEE, 1, true));
 
-        String resultExpected ="Sales made:" +
-                "\nCoffees: 2" +
-                "\nChocolates: 1" +
-                "\nTeas: 0" +
-                "\nOrange juices: 1" +
-                "\nTotal amount of sales: 2.3 €";
+        final String resultExpected = """
+                Sales made:
+                Coffees: 2
+                Chocolates: 1
+                Teas: 0
+                Orange juices: 1
+                Total amount of sales: 2.3 €""";
         dailyReportBuilder.printReport(orders);
         assertEquals(resultExpected, outContent.toString());
     }

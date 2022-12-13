@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FEAT-IT3] Quatrième iteration, ajout d'un service permettant d'obtenir un report des ventes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/CommandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CommandService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/DrinkMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/drinkMaker/DrinkMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/DrinkMakerImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/MoneyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/moneyChecking/MoneyChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/MoneyCheckerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/moneyChecking/MoneyCheckerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/report/DailyReportBuilderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/report/DailyReportBuilderImpl.java" afterDir="false" />
+    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FEAT-IT5] Cinquième iteration, ajout de deux services en cas de pénurie d'eau ou de lait et envoi de message si c'est le cas">
       <change beforePath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/services/MoneyCheckerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/MoneyCheckerImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,21 +66,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommandServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Kata-CoffeeMachine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="services.report.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="services" />
-      <option name="MAIN_CLASS_NAME" value="services.CommandServiceImplTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CommandServiceImplTest.shouldNotMakeDrinkWithShortageAndSendMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Kata-CoffeeMachine" />
       <extension name="coverage">
@@ -101,6 +77,22 @@
       <option name="PACKAGE_NAME" value="services" />
       <option name="MAIN_CLASS_NAME" value="services.CommandServiceImplTest" />
       <option name="METHOD_NAME" value="shouldNotMakeDrinkWithShortageAndSendMessage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommandServiceImplTest.shouldNotOrderCoffeeWithoutMoneyAndSendMsg" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Kata-CoffeeMachine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="services" />
+      <option name="MAIN_CLASS_NAME" value="services.CommandServiceImplTest" />
+      <option name="METHOD_NAME" value="shouldNotOrderCoffeeWithoutMoneyAndSendMsg" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -140,10 +132,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in Kata-CoffeeMachine" />
+        <item itemvalue="JUnit.CommandServiceImplTest.shouldNotOrderCoffeeWithoutMoneyAndSendMsg" />
         <item itemvalue="JUnit.CommandServiceImplTest.shouldNotMakeDrinkWithShortageAndSendMessage" />
         <item itemvalue="JUnit.DailyReportBuilderImplTest.shouldPrintDailyReport" />
         <item itemvalue="JUnit.MoneyCheckerImplTest" />
-        <item itemvalue="JUnit.CommandServiceImplTest" />
       </list>
     </recent_temporary>
   </component>
@@ -191,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670935711990</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[FEAT-IT5] Cinquième iteration, ajout de deux services en cas de pénurie d'eau ou de lait et envoi de message si c'est le cas">
+      <created>1670937249270</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670937249270</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,6 +210,7 @@
     <MESSAGE value="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine" />
     <MESSAGE value="[FEAT-IT3] Troisième iteration, ajout du type de boisson jus d'orange et option de boisson extra chaude" />
     <MESSAGE value="[FEAT-IT3] Quatrième iteration, ajout d'un service permettant d'obtenir un report des ventes" />
-    <option name="LAST_COMMIT_MESSAGE" value="[FEAT-IT3] Quatrième iteration, ajout d'un service permettant d'obtenir un report des ventes" />
+    <MESSAGE value="[FEAT-IT5] Cinquième iteration, ajout de deux services en cas de pénurie d'eau ou de lait et envoi de message si c'est le cas" />
+    <option name="LAST_COMMIT_MESSAGE" value="[FEAT-IT5] Cinquième iteration, ajout de deux services en cas de pénurie d'eau ou de lait et envoi de message si c'est le cas" />
   </component>
 </project>
