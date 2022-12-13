@@ -3,7 +3,11 @@ package services;
 import model.Message;
 import model.Order;
 import repositories.OrderRepository;
+import services.drinkMaker.DrinkMaker;
+import services.moneyChecking.MoneyChecker;
 import services.report.DailyReportBuilder;
+import services.shortage.BeverageQuantityChecker;
+import services.shortage.EmailNotifier;
 
 public class CommandServiceImpl implements CommandService {
 
@@ -15,11 +19,17 @@ public class CommandServiceImpl implements CommandService {
 
     private final OrderRepository orderRepository;
 
-    public CommandServiceImpl(DrinkMaker drinkMaker, MoneyChecker moneyChecker, DailyReportBuilder dailyReportBuilder, OrderRepository orderRepository) {
+    private final EmailNotifier emailNotifier;
+
+    private final BeverageQuantityChecker beverageQuantityChecker;
+
+    public CommandServiceImpl(DrinkMaker drinkMaker, MoneyChecker moneyChecker, DailyReportBuilder dailyReportBuilder, OrderRepository orderRepository, EmailNotifier emailNotifier, BeverageQuantityChecker beverageQuantityChecker) {
         this.drinkMaker = drinkMaker;
         this.moneyChecker = moneyChecker;
         this.dailyReportBuilder = dailyReportBuilder;
         this.orderRepository = orderRepository;
+        this.emailNotifier = emailNotifier;
+        this.beverageQuantityChecker = beverageQuantityChecker;
     }
 
     @Override
@@ -27,15 +37,19 @@ public class CommandServiceImpl implements CommandService {
         double amountInMachine = moneyChecker.isAffordable(order.getOrderType());
         if(amountInMachine >= 0) {
             String translatedOrder = buildStringFromOrder(order);
-            drinkMaker.makeDrink(translatedOrder);
-            orderRepository.save(order);
+            if(!beverageQuantityChecker.isEmpty(translatedOrder)) {
+                drinkMaker.makeDrink(translatedOrder);
+                orderRepository.save(order);
+            } else {
+                emailNotifier.notifyMissingDrink(translatedOrder);
+            }
         } else {
-            sendMessageToDringMaker(new Message("Monney is missing: "+Math.abs(amountInMachine)+" €"));
+            sendMessageToDrinkMaker(new Message("Monney is missing: "+Math.abs(amountInMachine)+" €"));
         }
     }
 
     @Override
-    public void sendMessageToDringMaker(Message message) {
+    public void sendMessageToDrinkMaker(Message message) {
         String translatedMessage = buildStringFromMessage(message);
         this.drinkMaker.sendMessage(translatedMessage);
     }

@@ -1,8 +1,9 @@
-package services;
+package services.moneyChecking;
 
 import model.OrderType;
+import services.moneyChecking.MoneyChecker;
 
-public class MoneyCheckerImpl implements MoneyChecker{
+public class MoneyCheckerImpl implements MoneyChecker {
 
     private double currentAmount;
     private static final double PRICE_TEA = 0.4;

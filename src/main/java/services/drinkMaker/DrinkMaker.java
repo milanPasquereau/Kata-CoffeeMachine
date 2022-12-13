@@ -1,4 +1,4 @@
-package services;
+package services.drinkMaker;
 
 public interface DrinkMaker {
 

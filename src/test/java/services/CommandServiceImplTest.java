@@ -11,7 +11,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import repositories.OrderRepository;
+import services.drinkMaker.DrinkMaker;
+import services.moneyChecking.MoneyChecker;
 import services.report.DailyReportBuilder;
+import services.shortage.BeverageQuantityChecker;
+import services.shortage.EmailNotifier;
 
 import static org.mockito.Mockito.*;
 
@@ -30,12 +34,18 @@ class CommandServiceImplTest {
     @Mock
     private OrderRepository orderRepository;
 
+    @Mock
+    private EmailNotifier emailNotifier;
+
+    @Mock
+    private BeverageQuantityChecker beverageQuantityChecker;
+
     @InjectMocks
     private CommandServiceImpl commandService;
 
     @BeforeEach
     void init() {
-        commandService = new CommandServiceImpl(drinkMaker, moneyChecker, dailyReportBuilder, orderRepository);
+        commandService = new CommandServiceImpl(drinkMaker, moneyChecker, dailyReportBuilder, orderRepository, emailNotifier, beverageQuantityChecker);
     }
 
     @Test
@@ -101,7 +111,7 @@ class CommandServiceImplTest {
     @DisplayName("should send message to drink maker")
     void shouldSendMessageToDrinkMaker() {
         Message message = new Message("Contenu du message");
-        commandService.sendMessageToDringMaker(message);
+        commandService.sendMessageToDrinkMaker(message);
         String expectedMsg = "M:Contenu du message";
 
         verify(drinkMaker).sendMessage(expectedMsg);
@@ -126,5 +136,18 @@ class CommandServiceImplTest {
         verifyNoMoreInteractions(dailyReportBuilder);
         verify(orderRepository).getAllOrders();
         verifyNoMoreInteractions(orderRepository);
+    }
+
+    @Test
+    @DisplayName("should not make a drink with shortage and send message")
+    void shouldNotMakeDrinkWithShortageAndSendMessage() {
+        when(moneyChecker.isAffordable(OrderType.COFFEE)).thenReturn(0.0);
+        when(beverageQuantityChecker.isEmpty("C::")).thenReturn(true);
+        Order order = new Order(OrderType.COFFEE, 0, false);
+
+        commandService.sendOrderToDrinkMaker(order);
+
+        verify(emailNotifier).notifyMissingDrink("C::");
+        verifyNoMoreInteractions(emailNotifier);
     }
 }

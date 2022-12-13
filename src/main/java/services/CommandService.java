@@ -6,7 +6,7 @@ import model.Order;
 public interface CommandService {
 
     void sendOrderToDrinkMaker(Order order);
-    void sendMessageToDringMaker(Message message);
+    void sendMessageToDrinkMaker(Message message);
     void insertMoney(double amount);
     void printDailyReport();
 }
