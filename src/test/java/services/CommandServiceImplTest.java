@@ -34,7 +34,7 @@ class CommandServiceImplTest {
     @Test
     @DisplayName("should translate a coffee order with sugar and sufficient money")
     void shouldOrderCoffeeWithSugar() {
-        Order order = new Order(OrderType.COFFEE, 2);
+        Order order = new Order(OrderType.COFFEE, 2, false);
         when(moneyChecker.isAffordable(OrderType.COFFEE)).thenReturn(1.0);
         commandService.sendOrderToDrinkMaker(order);
         String expectedOrder = "C:2:0";
@@ -44,9 +44,33 @@ class CommandServiceImplTest {
     }
 
     @Test
+    @DisplayName("should translate a hot coffee order with sugar and sufficient money")
+    void shouldOrderHotCoffeeWithSugar() {
+        Order order = new Order(OrderType.COFFEE, 2, true);
+        when(moneyChecker.isAffordable(OrderType.COFFEE)).thenReturn(1.0);
+        commandService.sendOrderToDrinkMaker(order);
+        String expectedOrder = "Ch:2:0";
+
+        verify(drinkMaker).makeDrink(expectedOrder);
+        verifyNoMoreInteractions(drinkMaker);
+    }
+
+    @Test
+    @DisplayName("should translate a orange juice order with sufficient money")
+    void shouldOrderOrangeJuiceWithSugar() {
+        Order order = new Order(OrderType.ORANGE_JUICE, 0, false);
+        when(moneyChecker.isAffordable(OrderType.ORANGE_JUICE)).thenReturn(1.0);
+        commandService.sendOrderToDrinkMaker(order);
+        String expectedOrder = "O::";
+
+        verify(drinkMaker).makeDrink(expectedOrder);
+        verifyNoMoreInteractions(drinkMaker);
+    }
+
+    @Test
     @DisplayName("should translate a coffee order with sugar and send message")
     void shouldNotOrderCoffeeWithoutMoneyAndSendMsg() {
-        Order order = new Order(OrderType.COFFEE, 2);
+        Order order = new Order(OrderType.COFFEE, 2, false);
         when(moneyChecker.isAffordable(OrderType.COFFEE)).thenReturn(-0.5);
         commandService.sendOrderToDrinkMaker(order);
 
@@ -58,7 +82,7 @@ class CommandServiceImplTest {
     @DisplayName("should translate a tee order without sugar and sufficient money")
     void shouldTranslateTeaOrderWithoutSugarToString() {
         when(moneyChecker.isAffordable(OrderType.TEA)).thenReturn(0.0);
-        Order order = new Order(OrderType.TEA, 0);
+        Order order = new Order(OrderType.TEA, 0, false);
         commandService.sendOrderToDrinkMaker(order);
         String expectedOrder = "T::";
 

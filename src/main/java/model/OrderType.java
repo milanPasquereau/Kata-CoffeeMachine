@@ -1,5 +1,5 @@
 package model;
 
 public enum OrderType {
-    TEA, COFFEE, CHOCOLATE
+    TEA, COFFEE, CHOCOLATE, ORANGE_JUICE
 }

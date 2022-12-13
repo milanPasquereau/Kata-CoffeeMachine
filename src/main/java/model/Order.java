@@ -1,14 +1,17 @@
 package model;
 
 public class Order {
-    private OrderType orderType;
-    private int sugars;
-    private boolean withAStick;
+    private final OrderType orderType;
+    private final int sugars;
+    private final boolean withAStick;
 
-    public Order(OrderType orderType, int sugars) {
+    private boolean extraHot;
+
+    public Order(OrderType orderType, int sugars, boolean extraHot) {
         this.orderType = orderType;
         this.sugars = sugars;
         this.withAStick = sugars > 0;
+        this.extraHot = extraHot;
     }
 
     public OrderType getOrderType() {
@@ -21,5 +24,13 @@ public class Order {
 
     public boolean isWithAStick() {
         return withAStick;
+    }
+
+    public boolean isExtraHot() {
+        return extraHot;
+    }
+
+    public void setExtraHot(boolean extraHot) {
+        this.extraHot = extraHot;
     }
 }

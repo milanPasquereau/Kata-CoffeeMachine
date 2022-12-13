@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FEAT-IT1] Premiere iteration, implementation de la logique de construction d'ordres">
-      <change afterPath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" afterDir="false" />
+    <list default="true" id="6d67e9af-add4-475f-b2b5-a47177024b87" name="Changes" comment="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/KataCoffeeMachineApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/drinkmaker/DrinkMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DrinkMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/drinkmaker/DrinkMakerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/DrinkMakerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/translater/CommandTranslater.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/translater/CommandTranslaterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/OrderType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/OrderType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CommandServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/MoneyCheckerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MoneyCheckerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/services/CommandServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +62,15 @@
       <recent name="translater" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MoneyCheckerImplTest">
+  <component name="RunManager" selected="JUnit.All in Kata-CoffeeMachine">
+    <configuration name="All in Kata-CoffeeMachine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Kata-CoffeeMachine" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CommandServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Kata-CoffeeMachine" />
       <extension name="coverage">
@@ -91,22 +97,6 @@
       <option name="PACKAGE_NAME" value="services" />
       <option name="MAIN_CLASS_NAME" value="services.CommandServiceImplTest" />
       <option name="METHOD_NAME" value="shouldTranslateCoffeeOrderWithSugarToString" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CommandServiceImplTest.shouldTranslateOrderToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Kata-CoffeeMachine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="services" />
-      <option name="MAIN_CLASS_NAME" value="services.CommandServiceImplTest" />
-      <option name="METHOD_NAME" value="shouldTranslateOrderToString" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -145,11 +135,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in Kata-CoffeeMachine" />
         <item itemvalue="JUnit.MoneyCheckerImplTest" />
         <item itemvalue="JUnit.CommandServiceImplTest" />
         <item itemvalue="JUnit.CommandServiceImplTest.shouldTranslateCoffeeOrderWithSugarToString" />
         <item itemvalue="JUnit.CommandServiceImplTest.shouldTranslateTeaOrderWithoutSugarToString" />
-        <item itemvalue="JUnit.CommandServiceImplTest.shouldTranslateOrderToString" />
       </list>
     </recent_temporary>
   </component>
@@ -176,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670857093623</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine">
+      <created>1670924831106</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670924831106</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -193,7 +190,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[INIT] Initialisation du projet" />
     <MESSAGE value="[FEAT-IT1] Premiere iteration, implementation de la logique de construction d'ordres" />
-    <option name="LAST_COMMIT_MESSAGE" value="[FEAT-IT1] Premiere iteration, implementation de la logique de construction d'ordres" />
+    <MESSAGE value="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine" />
+    <option name="LAST_COMMIT_MESSAGE" value="[FEAT-IT2] Seconde iteration, ajout d'un money checker pour gérer l'argent inséré dans la machine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
