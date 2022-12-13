@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import services.money.MoneyCheckerImpl;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -19,15 +21,15 @@ class MoneyCheckerImplTest {
     @Test
     @DisplayName("should return negative amount of money when there is no money")
     void shouldReturnNegativeAmountOfMoneyWithNoMoney() {
-        final double amountMissing = moneyChecker.isAffordable(OrderType.COFFEE);
-        assertEquals(-0.6, amountMissing);
+        final BigDecimal amountMissing = moneyChecker.isAffordable(OrderType.COFFEE);
+        assertEquals(BigDecimal.valueOf(-0.6), amountMissing);
     }
 
     @Test
     @DisplayName("should return positive amount of money when there is sufficient money")
     void shouldReturnPositiveAmountOfMoneyWithSufficientMoney() {
-        moneyChecker.insertMoney(5.0);
-        final double amount = moneyChecker.isAffordable(OrderType.COFFEE);
-        assertEquals(4.4, amount);
+        moneyChecker.insertMoney(BigDecimal.valueOf(5));
+        final BigDecimal amount = moneyChecker.isAffordable(OrderType.COFFEE);
+        assertEquals(BigDecimal.valueOf(4.4), amount);
     }
 }

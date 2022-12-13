@@ -2,9 +2,11 @@ package services.money;
 
 import model.OrderType;
 
+import java.math.BigDecimal;
+
 public interface MoneyChecker {
 
-    double isAffordable(OrderType orderType);
+    BigDecimal isAffordable(OrderType orderType);
 
-    void insertMoney(double amount);
+    void insertMoney(BigDecimal amount);
 }

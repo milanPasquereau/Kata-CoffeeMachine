@@ -8,14 +8,14 @@ import java.util.List;
 
 public class DailyReportBuilderImpl implements DailyReportBuilder {
 
-    private static final double PRICE_TEA = 0.4;
-    private static final double PRICE_COFFEE = 0.6;
-    private static final double PRICE_CHOCOLATE = 0.5;
-    private static final double PRICE_ORANGE_JUICE = 0.6;
+    private static final BigDecimal PRICE_TEA = BigDecimal.valueOf(0.4);
+    private static final BigDecimal PRICE_COFFEE = BigDecimal.valueOf(0.6);
+    private static final BigDecimal PRICE_CHOCOLATE = BigDecimal.valueOf(0.5);
+    private static final BigDecimal PRICE_ORANGE_JUICE = BigDecimal.valueOf(0.6);
 
     @Override
     public void printReport(List<Order> orders) {
-        double totalAmount = 0;
+        BigDecimal totalAmount = BigDecimal.valueOf(0);
         int nbSoldCoffees = 0;
         int nbSoldChocolates = 0;
         int nbSoldTeas = 0;
@@ -23,19 +23,19 @@ public class DailyReportBuilderImpl implements DailyReportBuilder {
         for(Order order : orders) {
             switch (order.getOrderType()) {
                 case COFFEE -> {
-                    totalAmount += PRICE_COFFEE;
+                    totalAmount = totalAmount.add(PRICE_COFFEE);
                     nbSoldCoffees++;
                 }
                 case TEA -> {
-                    totalAmount += PRICE_TEA;
+                    totalAmount = totalAmount.add(PRICE_TEA);
                     nbSoldTeas++;
                 }
                 case CHOCOLATE -> {
-                    totalAmount += PRICE_CHOCOLATE;
+                    totalAmount = totalAmount.add(PRICE_CHOCOLATE);
                     nbSoldChocolates++;
                 }
                 case ORANGE_JUICE -> {
-                    totalAmount += PRICE_ORANGE_JUICE;
+                    totalAmount = totalAmount.add(PRICE_ORANGE_JUICE);
                     nbSoldOrangeJuices++;
                 }
             }
@@ -43,10 +43,10 @@ public class DailyReportBuilderImpl implements DailyReportBuilder {
         System.out.print(buildReportFromData(totalAmount, nbSoldCoffees, nbSoldChocolates, nbSoldTeas, nbSoldOrangeJuices));
     }
 
-    private String buildReportFromData(double totalAmount, int nbSoldCoffees,
+    private String buildReportFromData(BigDecimal totalAmount, int nbSoldCoffees,
                                        int nbSoldChocolates, int nbSoldTeas,
                                        int nbSoldOrangeJuices) {
-        BigDecimal bd = BigDecimal.valueOf(totalAmount).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal bd = totalAmount.setScale(2, RoundingMode.HALF_UP);
         return "Sales made:"
                 + "\nCoffees: " + nbSoldCoffees
                 + "\nChocolates: " + nbSoldChocolates

@@ -9,6 +9,8 @@ import services.report.DailyReportBuilder;
 import services.shortage.BeverageQuantityChecker;
 import services.shortage.EmailNotifier;
 
+import java.math.BigDecimal;
+
 public class CommandServiceImpl implements CommandService {
 
     private final DrinkMaker drinkMaker;
@@ -34,8 +36,8 @@ public class CommandServiceImpl implements CommandService {
 
     @Override
     public void sendOrderToDrinkMaker(Order order) {
-        double amountInMachine = moneyChecker.isAffordable(order.getOrderType());
-        if(amountInMachine >= 0) {
+        BigDecimal amountInMachine = moneyChecker.isAffordable(order.getOrderType());
+        if(amountInMachine.compareTo(BigDecimal.valueOf(0)) >= 0) {
             String translatedOrder = buildStringFromOrder(order);
             if(!beverageQuantityChecker.isEmpty(translatedOrder)) {
                 drinkMaker.makeDrink(translatedOrder);
@@ -44,7 +46,7 @@ public class CommandServiceImpl implements CommandService {
                 emailNotifier.notifyMissingDrink(translatedOrder);
             }
         } else {
-            sendMessageToDrinkMaker(new Message("Monney is missing: "+Math.abs(amountInMachine)+" €"));
+            sendMessageToDrinkMaker(new Message("Monney is missing: "+amountInMachine.abs()+" €"));
         }
     }
 
@@ -55,7 +57,7 @@ public class CommandServiceImpl implements CommandService {
     }
 
     @Override
-    public void insertMoney(double amount) {
+    public void insertMoney(BigDecimal amount) {
         this.moneyChecker.insertMoney(amount);
     }
 
