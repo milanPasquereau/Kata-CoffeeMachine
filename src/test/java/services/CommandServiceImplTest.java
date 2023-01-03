@@ -13,8 +13,7 @@ import repositories.OrderRepository;
 import services.drinkMaker.DrinkMaker;
 import services.money.MoneyChecker;
 import services.report.DailyReportBuilder;
-import services.shortage.BeverageQuantityChecker;
-import services.shortage.EmailNotifier;
+import services.shortage.StockService;
 
 import java.math.BigDecimal;
 
@@ -36,10 +35,7 @@ class CommandServiceImplTest {
     private OrderRepository orderRepository;
 
     @Mock
-    private EmailNotifier emailNotifier;
-
-    @Mock
-    private BeverageQuantityChecker beverageQuantityChecker;
+    private StockService stockService;
 
     @InjectMocks
     private CommandServiceImpl commandService;
@@ -101,7 +97,7 @@ class CommandServiceImplTest {
     @Test
     @DisplayName("should translate a tee order without sugar and sufficient money")
     void shouldTranslateTeaOrderWithoutSugarToString() {
-        when(moneyChecker.isAffordable(OrderType.TEA)).thenReturn(BigDecimal.valueOf(0));
+        when(moneyChecker.isAffordable(OrderType.TEA)).thenReturn(BigDecimal.ZERO);
         final Order order = new Order(OrderType.TEA, 0, false);
         final String expectedOrder = "T::";
         commandService.sendOrderToDrinkMaker(order);
@@ -146,14 +142,14 @@ class CommandServiceImplTest {
     @Test
     @DisplayName("should not make a drink with shortage and send message")
     void shouldNotMakeDrinkWithShortageAndSendMessage() {
-        when(moneyChecker.isAffordable(OrderType.COFFEE)).thenReturn(BigDecimal.valueOf(0));
-        when(beverageQuantityChecker.isEmpty("C::")).thenReturn(true);
+        when(moneyChecker.isAffordable(OrderType.COFFEE)).thenReturn(BigDecimal.ZERO);
+        when(stockService.checkIfBeverageIsEmpty("C::")).thenReturn(true);
         final Order order = new Order(OrderType.COFFEE, 0, false);
 
         commandService.sendOrderToDrinkMaker(order);
 
-        verify(emailNotifier).notifyMissingDrink("C::");
-        verifyNoMoreInteractions(emailNotifier);
+        verify(stockService).notifyMissingDrink("C::");
+        verifyNoMoreInteractions(stockService);
         verifyNoInteractions(orderRepository);
     }
 }

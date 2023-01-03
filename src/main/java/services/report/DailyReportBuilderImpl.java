@@ -1,57 +1,36 @@
 package services.report;
 
 import model.Order;
+import model.OrderType;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DailyReportBuilderImpl implements DailyReportBuilder {
 
-    private static final BigDecimal PRICE_TEA = BigDecimal.valueOf(0.4);
-    private static final BigDecimal PRICE_COFFEE = BigDecimal.valueOf(0.6);
-    private static final BigDecimal PRICE_CHOCOLATE = BigDecimal.valueOf(0.5);
-    private static final BigDecimal PRICE_ORANGE_JUICE = BigDecimal.valueOf(0.6);
-
     @Override
     public void printReport(List<Order> orders) {
-        BigDecimal totalAmount = BigDecimal.valueOf(0);
-        int nbSoldCoffees = 0;
-        int nbSoldChocolates = 0;
-        int nbSoldTeas = 0;
-        int nbSoldOrangeJuices = 0;
-        for(Order order : orders) {
-            switch (order.getOrderType()) {
-                case COFFEE -> {
-                    totalAmount = totalAmount.add(PRICE_COFFEE);
-                    nbSoldCoffees++;
-                }
-                case TEA -> {
-                    totalAmount = totalAmount.add(PRICE_TEA);
-                    nbSoldTeas++;
-                }
-                case CHOCOLATE -> {
-                    totalAmount = totalAmount.add(PRICE_CHOCOLATE);
-                    nbSoldChocolates++;
-                }
-                case ORANGE_JUICE -> {
-                    totalAmount = totalAmount.add(PRICE_ORANGE_JUICE);
-                    nbSoldOrangeJuices++;
-                }
-            }
-        }
-        System.out.print(buildReportFromData(totalAmount, nbSoldCoffees, nbSoldChocolates, nbSoldTeas, nbSoldOrangeJuices));
+        Map<OrderType, Long> countDrinks = orders
+                .stream()
+                .collect(Collectors.groupingBy(Order::getOrderType, Collectors.counting()));
+        System.out.print(buildReportFromData(countDrinks));
     }
 
-    private String buildReportFromData(BigDecimal totalAmount, int nbSoldCoffees,
-                                       int nbSoldChocolates, int nbSoldTeas,
-                                       int nbSoldOrangeJuices) {
-        BigDecimal bd = totalAmount.setScale(2, RoundingMode.HALF_UP);
+    private String buildReportFromData(Map<OrderType, Long> countDrinks) {
+        final BigDecimal[] totalAmount = {BigDecimal.ZERO};
+        countDrinks.forEach((orderType, nb) -> totalAmount[0] = totalAmount[0].add(orderType.getPrice().multiply(BigDecimal.valueOf(nb))));
         return "Sales made:"
-                + "\nCoffees: " + nbSoldCoffees
-                + "\nChocolates: " + nbSoldChocolates
-                + "\nTeas: " + nbSoldTeas
-                + "\nOrange juices: " + nbSoldOrangeJuices
-                + "\nTotal amount of sales: " + bd.doubleValue() + " €";
+                + "\nCoffees: " + formatCountDrinks(countDrinks.get(OrderType.COFFEE))
+                + "\nChocolates: " + formatCountDrinks(countDrinks.get(OrderType.CHOCOLATE))
+                + "\nTeas: " + formatCountDrinks(countDrinks.get(OrderType.TEA))
+                + "\nOrange juices: " + formatCountDrinks(countDrinks.get(OrderType.ORANGE_JUICE))
+                + "\nTotal amount of sales: " + totalAmount[0].setScale(2, RoundingMode.HALF_UP).doubleValue() + " €";
+    }
+
+    private Long formatCountDrinks(Long count) {
+        return count != null ? count : 0;
     }
 }

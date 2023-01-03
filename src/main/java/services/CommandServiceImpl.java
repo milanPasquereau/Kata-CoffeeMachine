@@ -6,44 +6,36 @@ import repositories.OrderRepository;
 import services.drinkMaker.DrinkMaker;
 import services.money.MoneyChecker;
 import services.report.DailyReportBuilder;
-import services.shortage.BeverageQuantityChecker;
-import services.shortage.EmailNotifier;
+import services.shortage.StockService;
 
 import java.math.BigDecimal;
 
 public class CommandServiceImpl implements CommandService {
 
     private final DrinkMaker drinkMaker;
-
     private final MoneyChecker moneyChecker;
-
     private final DailyReportBuilder dailyReportBuilder;
-
+    private final StockService stockService;
     private final OrderRepository orderRepository;
 
-    private final EmailNotifier emailNotifier;
-
-    private final BeverageQuantityChecker beverageQuantityChecker;
-
-    public CommandServiceImpl(DrinkMaker drinkMaker, MoneyChecker moneyChecker, DailyReportBuilder dailyReportBuilder, OrderRepository orderRepository, EmailNotifier emailNotifier, BeverageQuantityChecker beverageQuantityChecker) {
+    public CommandServiceImpl(DrinkMaker drinkMaker, MoneyChecker moneyChecker, DailyReportBuilder dailyReportBuilder, OrderRepository orderRepository, StockService stockService) {
         this.drinkMaker = drinkMaker;
         this.moneyChecker = moneyChecker;
         this.dailyReportBuilder = dailyReportBuilder;
         this.orderRepository = orderRepository;
-        this.emailNotifier = emailNotifier;
-        this.beverageQuantityChecker = beverageQuantityChecker;
+        this.stockService = stockService;
     }
 
     @Override
     public void sendOrderToDrinkMaker(Order order) {
         BigDecimal amountInMachine = moneyChecker.isAffordable(order.getOrderType());
-        if(amountInMachine.compareTo(BigDecimal.valueOf(0)) >= 0) {
+        if(amountInMachine.compareTo(BigDecimal.ZERO) >= 0) {
             String translatedOrder = buildStringFromOrder(order);
-            if(!beverageQuantityChecker.isEmpty(translatedOrder)) {
+            if(!stockService.checkIfBeverageIsEmpty(translatedOrder)) {
                 drinkMaker.makeDrink(translatedOrder);
                 orderRepository.save(order);
             } else {
-                emailNotifier.notifyMissingDrink(translatedOrder);
+                stockService.notifyMissingDrink(translatedOrder);
             }
         } else {
             sendMessageToDrinkMaker(new Message("Monney is missing: "+amountInMachine.abs()+" €"));
@@ -58,7 +50,9 @@ public class CommandServiceImpl implements CommandService {
 
     @Override
     public void insertMoney(BigDecimal amount) {
-        this.moneyChecker.insertMoney(amount);
+        if(amount.compareTo(BigDecimal.ZERO)> 0) {
+            this.moneyChecker.insertMoney(amount);
+        }
     }
 
     @Override
